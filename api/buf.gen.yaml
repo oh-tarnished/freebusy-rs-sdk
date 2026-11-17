@@ -1,0 +1,13 @@
+# Regenerates the repository (its root is ..) from the API:
+# scripts/generate.sh and the regenerate workflow run it, after building the
+# reference images sdk.yaml lists.
+version: v2
+inputs:
+  - module: buf.build/shokki-engineering/freebusy:4f28df31b78246a1b538b9ac24506cdb
+plugins:
+  - local: protoc-gen-sdk
+    out: ..
+    strategy: all
+    opt:
+      - lang=rust
+      - config=sdk.yaml

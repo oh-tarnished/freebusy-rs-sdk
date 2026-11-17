@@ -1,0 +1,47 @@
+name: Regenerate
+
+# Regenerates the repository from the API with the protoc-gen-sdk GitHub
+# Action, builds and tests it, and opens a pull request with the result. On
+# the API's release (repository_dispatch, type api-release, with
+# client_payload {"module": "buf.build/org/name", "commit": "<commit or
+# label>"} moving that module's pins), weekly (a new protoc-gen-sdk or
+# GAPIC), and by hand.
+#
+# The pull request is opened by Minerva, the GitHub App whose ID is the
+# repository variable MINERVA_APP_ID and whose private key is the secret
+# MINERVA_PRIVATE_KEY, so CI runs on it; without them it is opened with
+# GITHUB_TOKEN, and CI has to be started by hand.
+
+on:
+  repository_dispatch:
+    types: [api-release]
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  regenerate:
+    name: Regenerate
+    runs-on: ubuntu-latest
+    steps:
+      - id: minerva
+        if: vars.MINERVA_APP_ID != ''
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.MINERVA_APP_ID }}
+          private-key: ${{ secrets.MINERVA_PRIVATE_KEY }}
+      - uses: actions/checkout@v5
+      - uses: the-protobuf-project/sdk@v0.2.0
+        with:
+          language: rust
+          module: ${{ github.event.client_payload.module }}
+          commit: ${{ github.event.client_payload.commit }}
+          token: ${{ steps.minerva.outputs.token || github.token }}
