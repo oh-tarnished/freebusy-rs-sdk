@@ -69,7 +69,7 @@ rust-version = "1.91"
 [workspace.dependencies]
 anyhow = { default-features = false, version = "1.0.102", features = ["std"] }
 async-trait = { default-features = false, version = "0.1.85" }
-base64 = { default-features = false, version = "0.22", features = ["std"] }
+base64 = { default-features = false, version = "0.23", features = ["std"] }
 bytes = { default-features = false, version = "1.10", features = ["serde"] }
 futures = { default-features = false, version = "0.3", features = ["std"] }
 gaxi = { default-features = false, version = "0.7.22", package = "google-cloud-gax-internal" }
