@@ -106,6 +106,8 @@ languages:
   rust:
     crate: shokki-freebusy
     repository: oh-tarnished/freebusy-rs-sdk
+    # osv-scanner.toml: advisories reviewed and ignored, with their reasons.
+    custom_files: custom-rust
     # Like the other languages' hand-written examples, none are generated;
     # the README and docs show every method.
     examples: false

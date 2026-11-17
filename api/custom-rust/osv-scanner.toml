@@ -1,0 +1,4 @@
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0543"
+ignoreUntil = 2027-01-31
+reason = "chrono is unmaintained (no fixed version); it is only in Cargo.lock as an optional dependency of serde_with, behind its chrono feature, which nothing enables: cargo tree -i chrono finds no path and it is never built."

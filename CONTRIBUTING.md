@@ -8,6 +8,8 @@ regeneration.
 
 - To change the SDK's shape (names, services, docs, options), edit
   `api/sdk.yaml` and regenerate.
+- To change hand-written helpers or examples, edit them under
+  `api/custom-rust`, the source the generator copies them from.
 - To change the API, change its protos; the regenerate workflow picks up the
   new release.
 
@@ -24,7 +26,7 @@ cargo fmt --check
 ```sh
 brew install the-protobuf-project/tap/librarian  # librarian 0.53.0
 cargo install taplo-cli                          # librarian formats Cargo.toml with it
-go install github.com/the-protobuf-project/sdk/plugin/cmd/protoc-gen-sdk@v0.2.0
+go install github.com/the-protobuf-project/sdk/plugin/cmd/protoc-gen-sdk@v0.2.1
 bash scripts/generate.sh
 ```
 
