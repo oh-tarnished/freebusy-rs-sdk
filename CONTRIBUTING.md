@@ -26,7 +26,7 @@ cargo fmt --check
 ```sh
 brew install the-protobuf-project/tap/librarian  # librarian 0.53.0
 cargo install taplo-cli                          # librarian formats Cargo.toml with it
-go install github.com/the-protobuf-project/sdk/plugin/cmd/protoc-gen-sdk@v0.2.1
+go install github.com/the-protobuf-project/sdk/plugin/cmd/protoc-gen-sdk@v0.2.2
 bash scripts/generate.sh
 ```
 
