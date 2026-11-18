@@ -44,7 +44,7 @@ jobs:
       tag: ${{ steps.version.outputs.tag }}
       auto: ${{ steps.version.outputs.auto }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           fetch-depth: 0
@@ -90,7 +90,7 @@ jobs:
       TAG: ${{ needs.version.outputs.tag }}
       AUTO: ${{ needs.version.outputs.auto }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.version.outputs.tag }}
           fetch-depth: 0
@@ -132,11 +132,11 @@ jobs:
           output-file: sbom.spdx.json
           upload-artifact: false
       - name: SLSA build provenance
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: target/package/*.crate
       - name: SBOM attestation
-        uses: actions/attest-sbom@v2
+        uses: actions/attest-sbom@v4
         with:
           subject-path: target/package/*.crate
           sbom-path: sbom.spdx.json
@@ -163,7 +163,7 @@ jobs:
     env:
       TAG: ${{ needs.version.outputs.tag }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.version.outputs.tag }}
       - uses: dtolnay/rust-toolchain@stable
